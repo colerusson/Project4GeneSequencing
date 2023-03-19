@@ -22,7 +22,7 @@ INDEL = 5
 SUB = 1
 
 
-# implement the unrestricted alignment using the Needleman-Wunsch algorithm
+# unrestricted alignment using the Needleman-Wunsch algorithm
 def unrestricted_alignment(seq1, seq2):
     # Initialize the matrix
     matrix = [[0 for i in range(len(seq2) + 1)] for j in range(len(seq1) + 1)]
@@ -66,7 +66,7 @@ def unrestricted_alignment(seq1, seq2):
             alignment2 = seq2[j - 1] + alignment2
             j -= 1
 
-    # Add the remaining characters to the   alignment
+    # Add the remaining characters to the alignment
     while i > 0:
         alignment1 = seq1[i - 1] + alignment1
         alignment2 = '-' + alignment2
@@ -79,7 +79,7 @@ def unrestricted_alignment(seq1, seq2):
     return matrix[len(seq1)][len(seq2)], alignment1, alignment2
 
 
-# implement the banded alignment using the Needleman-Wunsch algorithm with a bandwidth of 2 * MAXINDELS + 1
+# banded alignment using the Needleman-Wunsch algorithm
 def banded_alignment(seq1, seq2):
     # Initialize the matrix
     matrix = [[0 for i in range(len(seq2) + 1)] for j in range(len(seq1) + 1)]
@@ -90,7 +90,7 @@ def banded_alignment(seq1, seq2):
     for j in range(len(seq2) + 1):
         matrix[0][j] = j * INDEL
 
-    # Fill in the rest of the matrix
+    # Fill in the rest of the matrix, bandwidth of 2*MAXINDELS + 1
     for i in range(1, len(seq1) + 1):
         for j in range(max(1, i - MAXINDELS), min(len(seq2) + 1, i + MAXINDELS + 1)):
             # Compute the score for a match, mismatch, and indel
