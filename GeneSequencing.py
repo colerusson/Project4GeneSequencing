@@ -79,22 +79,20 @@ def unrestricted_alignment(seq1, seq2):
     return matrix[len(seq1)][len(seq2)], alignment1, alignment2
 
 
-# implement the banded alignment using the Needleman-Wunsch algorithm
+# implement the banded alignment using the Needleman-Wunsch algorithm with a bandwidth of 2 * MAXINDELS + 1
 def banded_alignment(seq1, seq2):
-    # TODO: Implement the banded alignment
-    # Compute the bandwidth
-    bandwidth = 2 * MAXINDELS + 1
-
     # Initialize the matrix
-    matrix = [[0 for i in range(bandwidth)] for j in range(len(seq1) + 1)]
+    matrix = [[0 for i in range(len(seq2) + 1)] for j in range(len(seq1) + 1)]
 
-    # Initialize the first row
+    # Initialize the first row and column
     for i in range(len(seq1) + 1):
         matrix[i][0] = i * INDEL
+    for j in range(len(seq2) + 1):
+        matrix[0][j] = j * INDEL
 
     # Fill in the rest of the matrix
     for i in range(1, len(seq1) + 1):
-        for j in range(1, bandwidth):
+        for j in range(max(1, i - MAXINDELS), min(len(seq2) + 1, i + MAXINDELS + 1)):
             # Compute the score for a match, mismatch, and indel
             match = matrix[i - 1][j - 1] + (MATCH if seq1[i - 1] == seq2[j - 1] else SUB)
             indel1 = matrix[i - 1][j] + INDEL
