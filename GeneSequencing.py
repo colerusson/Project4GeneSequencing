@@ -81,6 +81,7 @@ def unrestricted_alignment(seq1, seq2):
 
 # implement the banded alignment using the Needleman-Wunsch algorithm
 def banded_alignment(seq1, seq2):
+    # TODO: Implement the banded alignment
     # Compute the bandwidth
     bandwidth = 2 * MAXINDELS + 1
 
