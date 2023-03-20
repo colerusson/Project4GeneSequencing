@@ -62,11 +62,6 @@ class Proj4GUI(QMainWindow):
                     app.processEvents()
                 jresults.append(s)
             self.processed_results.append(jresults)
-            # print the first 100 characters of the aligned sequences 3 and 10
-            if i == 2:
-                print('First 100 characters of aligned sequences for sequences 3 and 10:')
-                print('Sequence 03: {}'.format(jresults[9]['seqi_first100'][:100]))
-                print('Sequence 10: {}'.format(jresults[9]['seqj_first100'][:100]))
 
         end = time.time()
         ns = end - start
