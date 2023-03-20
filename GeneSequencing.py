@@ -143,6 +143,7 @@ def banded_alignment(seq1, seq2):
     return matrix[len(seq1)][len(seq2)], alignment1, alignment2
 
 
+
 class GeneSequencing:
 
     def __init__(self):
